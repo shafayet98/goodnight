@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block head %} 
+
+
+{% endblock %}
+
+
+{% block body %} 
+    <h2>Story</h2>
+    {% for item in data %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    <br>
+    <h2>Generated Image:</h2>
+
+    
+    {% for item in img_urls %}
+        <img src="{{ item }}" alt="Generated Image">
+    {% endfor %}
+
+{% endblock %}
