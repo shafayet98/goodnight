@@ -3,12 +3,17 @@
 
 {% block head %} 
 
-
 {% endblock %}
 
 
-{% block body %} 
-    <h2>Story</h2>
+{% block body %}
+    <div class="d-flex justify-content-center">
+        <div class="mb-3 prompt">
+            <textarea class="form-control" placeholder="Here is a story about / Write me a short story about..." id="exampleFormControlTextarea1" rows="1"></textarea>
+        </div>
+    </div>
+    
+
     {% for item in data %}
         <li>{{ item }}</li>
     {% endfor %}
