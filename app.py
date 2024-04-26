@@ -20,8 +20,10 @@ def index():
     if request.method == "POST":
         print("Here in POST")
         data = request.json or request.get_json()
+        # id of the provided option
         clicked_div_id = data.get('div_id')
-        print(f"Div with ID '{clicked_div_id}' was clicked.")
+        if clicked_div_id == 'id_gen_story':
+            print("Generating Story")
     # print(request)
     
     # story = """
@@ -61,6 +63,12 @@ def index():
     # print(img_urls)
     # print(type(img_urls))
     return render_template('index.html', data="Hello")
+
+@app.route('/generate_story', methods = ['POST'])
+def generate_story():
+    input_value = request.form['input_value']
+    print(input_value)
+    return render_template('index.html', data="Hello") 
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)
