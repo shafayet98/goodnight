@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify
 import requests
 from openai import OpenAI
 import json
@@ -11,15 +11,26 @@ client = OpenAI(
     api_key=API_KEY,
 )
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    story = """
-    One rainy night Maya was walking home early, when she saw a dog shivering with cold in a corner. Seeing his wet hair and scared face, he felt pity.
-    Maya slowly went to that dog and covered it with her umbrella. At first the dog was a little scared, but feeling the kindness of Maya, moved forward a little and came under the umbrella. His trembling body slowly calmed down.
-    Maya and the dog started walking towards the house together. Maya started feeling a deep relief. He realized that the happiness of the one who does kindness is not only given to the troubled person, but also to the person who helps.
-    Without thinking twice, Maya decided that she would adopt the dog and take care of it with love and give it a new life. The dog, now named Lucky, started living with Maya at her house.
-    This heartwarming story reminds us how small acts of kindness can make a big difference. It makes us understand that, we should take care of the sorrows and sufferings around us and should always extend a helping hand whenever possible. We can make a deep impact in the world with our kindness.
-    """
+    
+    if request.method == "GET":
+        print("Here")
+
+    if request.method == "POST":
+        print("Here in POST")
+        data = request.json or request.get_json()
+        clicked_div_id = data.get('div_id')
+        print(f"Div with ID '{clicked_div_id}' was clicked.")
+    # print(request)
+    
+    # story = """
+    # One rainy night Maya was walking home early, when she saw a dog shivering with cold in a corner. Seeing his wet hair and scared face, he felt pity.
+    # Maya slowly went to that dog and covered it with her umbrella. At first the dog was a little scared, but feeling the kindness of Maya, moved forward a little and came under the umbrella. His trembling body slowly calmed down.
+    # Maya and the dog started walking towards the house together. Maya started feeling a deep relief. He realized that the happiness of the one who does kindness is not only given to the troubled person, but also to the person who helps.
+    # Without thinking twice, Maya decided that she would adopt the dog and take care of it with love and give it a new life. The dog, now named Lucky, started living with Maya at her house.
+    # This heartwarming story reminds us how small acts of kindness can make a big difference. It makes us understand that, we should take care of the sorrows and sufferings around us and should always extend a helping hand whenever possible. We can make a deep impact in the world with our kindness.
+    # """
     # query = [{
     #     "role": "user",
     #     "content": "Here is a short story: " + story + "Here is a story. Create a short version of this story in 5 lines. It must be 5 lines. Make the response a JSON object with 'short version' as a key and your response as value.  "

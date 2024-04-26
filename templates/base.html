@@ -11,13 +11,33 @@
     <nav class="navbar">
         <div class="container">
           <a class="navbar-brand" href="#">
-            <img src="../static/images/logo.png" alt="Bootstrap">
+            <img src="../static/images/logo_2.png" alt="Bootstrap">
           </a>
         </div>
       </nav>
     <div class="container">
         {% block body %} {% endblock %}
     </div>
+
     
+    <script>
+        
+        console.log(JSON.stringify({div_id: 'id_gen_story'}))
+        jsond = JSON.stringify({div_id: 'id_gen_story'})
+        console.log(typeof(jsond))
+        document.getElementById('id_gen_story').addEventListener('click', function(){
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    "accept": "application/json"
+                },
+                body: JSON.stringify({div_id: 'id_gen_story'}),
+            })
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        })
+    </script>
 </body>
 </html>
