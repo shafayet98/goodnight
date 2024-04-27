@@ -14,16 +14,16 @@ client = OpenAI(
 @app.route('/', methods=['GET', 'POST'])
 def index():
     
-    if request.method == "GET":
-        print("Here")
+    # if request.method == "GET":
+    #     print("Here")
 
-    if request.method == "POST":
-        print("Here in POST")
-        data = request.json or request.get_json()
-        # id of the provided option
-        clicked_div_id = data.get('div_id')
-        if clicked_div_id == 'id_gen_story':
-            print("Generating Story")
+    # if request.method == "POST":
+    #     print("Here in POST")
+    #     data = request.json or request.get_json()
+    #     # id of the provided option
+    #     clicked_div_id = data.get('div_id')
+    #     if clicked_div_id == 'id_gen_story':
+    #         print("Generating Story")
     # print(request)
     
     # story = """
@@ -64,11 +64,18 @@ def index():
     # print(type(img_urls))
     return render_template('index.html', data="Hello")
 
-@app.route('/generate_story', methods = ['POST'])
+@app.route('/generate_story', methods = ['GET','POST'])
 def generate_story():
+    # data = request.json or request.get_json()
+    # print(data)
+    return render_template('generate_story.html', data="Hello") 
+    
+
+@app.route('/generate_story/create', methods= ['GET','POST'])
+def create_story():
     input_value = request.form['input_value']
     print(input_value)
-    return render_template('index.html', data="Hello") 
+    return render_template('story.html', data=input_value) 
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

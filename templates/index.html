@@ -10,13 +10,18 @@
 
 
 <div id="generate_story" class="mt-5 d-flex justify-content-center options gap-4">
-    <div id="id_gen_story" class="generate_story p-4">
-        <div class="d-flex justify-content-center">
-            <img src="../static/images/create.png" alt="">
-        </div>
-        <br>
-        <p>Tell me a story</p>
-    </div>
+    
+    <form action="/generate_story" method="post">
+        <button type = "submit" id="id_gen_story" class="generate_story p-4">
+            <div class="d-flex justify-content-center">
+                <img src="../static/images/create.png" alt="">
+            </div>
+            <br>
+            <p>Tell me a story</p>
+        </button>
+    </form>
+
+    
 
     <div id="id_sum_story" class="summary p-4">
         <div class="d-flex justify-content-center">
@@ -27,15 +32,7 @@
     </div>
 </div>
 
-<div id = "prompt" class="d-none justify-content-center mt-5">
-    <div class="mb-3 prompt">
-        <form action="/generate_story" method="post">
-            <label for="input_value">Input Value:</label>
-            <textarea type="text" class="form-control main_prompt_area" id="input_value" name="input_value" rows="1" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</div>
+
 
 
 <!-- {% for item in data %}

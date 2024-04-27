@@ -53,3 +53,7 @@ body {
     cursor: pointer;
     border: 1px solid #C8102E;
 }
+#id_gen_story{
+    background: white !important;
+    text-decoration: none;
+}

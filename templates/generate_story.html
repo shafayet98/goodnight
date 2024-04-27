@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+
+<div id = "prompt" class="d-flex justify-content-center mt-5">
+    <div class="mb-3 prompt">
+        <form action="/generate_story/create" method="post">
+            <!-- <label for="input_value">Input Value:</label> -->
+            <textarea type="text" class="form-control main_prompt_area" id="input_value" name="input_value" rows="1" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

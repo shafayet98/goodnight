@@ -21,37 +21,23 @@
 
     
     <script>
-        console.log(JSON.stringify({div_id: 'id_gen_story'}))
-        jsond = JSON.stringify({div_id: 'id_gen_story'})
-        console.log(typeof(jsond))
-        document.getElementById('id_gen_story').addEventListener('click', function(){
-
-            // prompt appears
-            let promptBox = document.getElementById("prompt");
-            promptBox.classList.remove('d-none');
-            promptBox.classList.add('d-flex');
-
-            // options disappears
-            let options = document.getElementById("generate_story");
-            options.classList.remove("d-flex");
-            options.classList.add("d-none");
-
-            // change placeholder
-            let main_prompt = document.querySelector(".main_prompt_area")
-            main_prompt.placeholder = "Write me a story about...";
-
-            fetch('/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    "accept": "application/json"
-                },
-                body: JSON.stringify({div_id: 'id_gen_story'}),
-            })
-            // .then(response => response.json())
-            // .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        })
+        // console.log(JSON.stringify({div_id: 'id_gen_story'}))
+        // jsond = JSON.stringify({div_id: 'id_gen_story'})
+        // console.log(typeof(jsond))
+        // document.getElementById('id_gen_story').addEventListener('click', function(){
+        //     this.form.submit();
+        //     // fetch('/generate_story', {
+        //     //     method: 'POST',
+        //     //     headers: {
+        //     //         'Content-Type': 'application/json;charset=UTF-8',
+        //     //         "accept": "application/json"
+        //     //     },
+        //     //     body: JSON.stringify({div_id: 'id_gen_story'}),
+        //     // })
+        //     // // .then(response => response.json())
+        //     // // .then(data => console.log(data))
+        //     // .catch(error => console.error('Error:', error));
+        // })
     </script>
 </body>
 </html>
