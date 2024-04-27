@@ -12,9 +12,12 @@ body {
     height: 150px;
 }
 
-.prompt {
-    border: 2px solid black;
+.prompt{
     width: 70%;
+}
+
+.prompt textarea{
+    border: 2px solid black;
 }
 
 .prompt textarea {
@@ -24,14 +27,30 @@ body {
 .form-control {
     text-decoration: none !important;
     border-radius: 0% !important;
+    box-shadow: none !important;
 }
 
 .form-control:focus {
     transition: none !important;
     text-decoration: none !important;
-    border: none !important;
+    border: 2px solid black !important;
     box-shadow: none !important;
 }
+.prompt button{
+    background: white !important;
+    text-decoration: none;
+    border: 2px solid black;
+    padding: 10px !important;
+    width: 20%;
+}
+.prompt button:hover{
+    background: #C8102E !important;
+    color: white !important;
+    text-decoration: none;
+    border: 2px solid black;
+    
+}
+
 
 .generate_story,
 .summary {
