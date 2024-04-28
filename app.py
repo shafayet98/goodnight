@@ -75,7 +75,39 @@ def generate_story():
 def create_story():
     input_value = request.form['input_value']
     print(input_value)
-    return render_template('story.html', data=input_value) 
+    query = [{
+        "role": "user",
+        "content": "Write me a short story about " + input_value +
+                    """The story should be 4 or 5 paragraph long. Return me the story in python dictionary format.
+                    just like this:
+
+                    {
+                        "title": "title of the story"
+                        "story": "story"
+                    }
+                    """
+    }]
+    chat_completion_response = client.chat.completions.create(
+                    messages=query,
+                    model="gpt-3.5-turbo",
+    )
+    response_data = chat_completion_response.choices[0].message.content.strip('\n').strip()
+    response_json = json.loads(response_data)
+    print(response_json['title'])
+    print(response_json['story'])
+
+    # generate image based on story
+    response = client.images.generate(
+        model="dall-e-3",
+        prompt= "Make a colorful comic like image based on the story given.\n" + "Story: " + response_json['story'],
+        size="1024x1024",
+        quality="standard",
+        n=1,
+    )
+    image_url = response.data[0].url
+
+
+    return render_template('story.html', data=response_json, image_url = image_url) 
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

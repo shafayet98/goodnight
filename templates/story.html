@@ -7,7 +7,15 @@
 
 
 {% block body %}
+    <h2>{{data['title']}}</h2>
+    <p>
+        {{ data['story'] }}
+    </p>
 
-{{data}}
+    <div class="">
+        <img src="{{ image_url }}" alt="Generated Image">
+    </div>
+
+
 
 {% endblock %}
