@@ -76,3 +76,7 @@ body {
     background: white !important;
     text-decoration: none;
 }
+
+#story_content{
+    color: red;
+}

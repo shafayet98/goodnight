@@ -8,36 +8,47 @@
     {% block head %} {% endblock %}
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="../static/images/logo_2.png" alt="Bootstrap">
-          </a>
-        </div>
-      </nav>
-    <div class="container">
-        {% block body %} {% endblock %}
-    </div>
+  <h1>GPT-3 Story Generator</h1>
+  <form action="/" method="post">
+      <label for="input_value">Enter your prompt:</label><br>
+      <textarea id="input_value" name="input_value" rows="4" cols="50"></textarea><br>
+      <input type="submit" value="Submit">
+  </form>
+  <div id="story_content">
+      <!-- Story content will be loaded here -->
+  </div>
+  <script>
+      const storyContent = document.getElementById('story_content');
+      const form = document.querySelector('form');
 
-    
-    <script>
-        // console.log(JSON.stringify({div_id: 'id_gen_story'}))
-        // jsond = JSON.stringify({div_id: 'id_gen_story'})
-        // console.log(typeof(jsond))
-        // document.getElementById('id_gen_story').addEventListener('click', function(){
-        //     this.form.submit();
-        //     // fetch('/generate_story', {
-        //     //     method: 'POST',
-        //     //     headers: {
-        //     //         'Content-Type': 'application/json;charset=UTF-8',
-        //     //         "accept": "application/json"
-        //     //     },
-        //     //     body: JSON.stringify({div_id: 'id_gen_story'}),
-        //     // })
-        //     // // .then(response => response.json())
-        //     // // .then(data => console.log(data))
-        //     // .catch(error => console.error('Error:', error));
-        // })
-    </script>
+      form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const input_value = document.getElementById('input_value').value;
+
+          const response = await fetch('/', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: `input_value=${encodeURIComponent(input_value)}`
+          });
+
+          const reader = response.body.getReader();
+          let decoder = new TextDecoder();
+          let partialChunk = '';
+          while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              const chunk = decoder.decode(value, { stream: true });
+              partialChunk += chunk;
+              const lines = partialChunk.split('\n\n');
+              partialChunk = lines.pop();
+              for (const line of lines) {
+                  storyContent.innerHTML += '<p>' + line + '</p>';
+              }
+          }
+      });
+  </script>
 </body>
 </html>
