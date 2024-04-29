@@ -74,17 +74,7 @@
     form_create_comic.addEventListener('submit', async(e) =>{
       e.preventDefault();
       generated_story = storyContent.innerHTML;
-
-      // const response = await fetch('/generate_comic', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/x-www-form-urlencoded',
-      //   },
-      //   body: `input_value=${encodeURIComponent(generated_story)}`
-        
-      // });
-    
-      // Send the content to the Flask app using AJAX
+      
       var xhr = new XMLHttpRequest();
         xhr.open('POST', '/generate/story/comic', true);
         xhr.setRequestHeader('Content-Type', 'application/json');

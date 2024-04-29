@@ -17,7 +17,6 @@ def index():
     return render_template('base.html')
     
 
-
 @app.route('/generate/story/comic', methods=['GET','POST'])
 def generate_comic():
     data = request.json['content']
@@ -66,7 +65,7 @@ def gen_story():
         # Return a response with the generator function as content
         return Response(generate_story_chunks(), mimetype='text/plain')
         
-    return render_template('index.html')
+    return render_template('generate_story.html')
 
 
 
