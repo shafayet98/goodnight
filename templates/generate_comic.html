@@ -8,8 +8,11 @@
 
 {% block body %}
 
-<!-- <h1>Hello</h1> -->
-<!-- action="/generate_story/create" method="post" -->
+{% if content %}
+<p>{{ data }}</p>
+{% else %}
+<p>No content received yet</p>
+{% endif %}
 
 
 

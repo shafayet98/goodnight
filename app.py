@@ -45,6 +45,34 @@ def index():
         
     return render_template('index.html')
 
+
+@app.route('/generate_comic', methods=['GET','POST'])
+def generate_comic():
+    data = request.json['content']
+    print(data)
+
+    response = client.images.generate(
+        model="dall-e-2",
+        prompt= "Story: " + data + "This is a short story. Generate a colorful comic like image based on the story given.",
+        size="1024x1024",
+        quality="standard",
+        n=1,
+    )
+    image_url = response.data[0].url
+    
+    print(image_url)
+    return image_url
+    # if request.is_json:
+    #     content = request.json['content']
+    #     print(content)  # Do something with the content
+    #     return render_template('generate_comic.html', data = content)
+    # else:
+    #     return jsonify({'error': 'Unsupported Media Type'}), 415
+    
+    # if request.method == 'POST':
+    #     pass
+    # else:
+    #     return render_template('generate_comic.html', data = "No content received")
 # @app.route('/generate_story', methods = ['GET','POST'])
 # def generate_story():
 #     return render_template('generate_story.html', data="Hello") 

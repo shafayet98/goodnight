@@ -37,6 +37,9 @@
       </form>
     </div>
     
+    <div>
+      <img id="gen_img" src="" alt="">
+    </div>
 
   </div>
 
@@ -63,9 +66,11 @@
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `input_value=${encodeURIComponent(input_value)}`
+        
       });
-
+      console.log(typeof(`input_value=${encodeURIComponent(input_value)}`));
       const reader = response.body.getReader();
+      console.log(reader);
       let decoder = new TextDecoder();
       let partialChunk = '';
       while (true) {
@@ -84,8 +89,30 @@
     form_create_comic.addEventListener('submit', async(e) =>{
       e.preventDefault();
       generated_story = storyContent.innerHTML;
-      console.log(generated_story);
-      
+
+      // const response = await fetch('/generate_comic', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded',
+      //   },
+      //   body: `input_value=${encodeURIComponent(generated_story)}`
+        
+      // });
+    
+      // Send the content to the Flask app using AJAX
+      var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/generate_comic', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE  && xhr.status === 200) {
+                // Handle the response from the Flask app if needed
+                console.log(xhr.responseText);
+                let img_url = xhr.responseText
+                document.getElementById("gen_img").src= img_url;
+                // window.location.href = '/generate_comic';
+            }
+        };
+        xhr.send(JSON.stringify({ content: generated_story }));
 
     })
 
