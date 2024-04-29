@@ -45,6 +45,7 @@
   <script>
     const storyContent = document.getElementById('story_content');
     const form_create_story = document.querySelector('#generate_story_form');
+    const form_create_comic = document.querySelector('#generate_comic_form');
     const prompt = document.getElementById("prompt");
     const comic_rqst_div = document.getElementById("comic_request");
 
@@ -79,6 +80,15 @@
         storyContent.innerHTML = partialChunk;
       }
     });
+
+    form_create_comic.addEventListener('submit', async(e) =>{
+      e.preventDefault();
+      generated_story = storyContent.innerHTML;
+      console.log(generated_story);
+      
+
+    })
+
   </script>
 </body>
 
