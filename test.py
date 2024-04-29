@@ -101,3 +101,160 @@
 
 # if __name__ == "__main__":
 #     app.run(debug=True, host='0.0.0.0', port=8080)
+
+
+
+
+
+
+# HTML
+# <!DOCTYPE html>
+# <html lang="en">
+
+# <head>
+#   <meta charset="UTF-8">
+#   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+#   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+#   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+#     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+#   {% block head %} {% endblock %}
+# </head>
+
+# <body>
+
+#   <div class="container">
+
+#     {% block body %}
+
+#     {% endblock %}
+#     <div id="prompt" class="d-flex justify-content-center mt-5">
+#       <div class="mb-3 prompt">
+#         <form id="generate_story_form" action="/" method="post">
+#           <!-- <label for="input_value">Input Value:</label> -->
+#           <textarea type="text" class="form-control main_prompt_area shadow-none" id="input_value" name="input_value"
+#             placeholder="Write me a story about...(ex. ghosts, a lost cat, etc.)" rows="1" required></textarea>
+#           <center>
+#             <button id="button" class="mt-3" type="submit">Submit</button>
+#           </center>
+#         </form>
+#       </div>
+#     </div>
+
+
+#     <div id= "comic_request" class="d-none justify-content-center mt-5">
+#       <form id = "generate_comic_form" action="/generate_comic" method="post">
+#         <button id="button_comic" class="mt-3" type="submit">Generate Comic</button>
+#       </form>
+#     </div>
+    
+#     <div>
+#       <img id="gen_img" src="" alt="">
+#     </div>
+
+#   </div>
+
+
+
+#   <script>
+#     const storyContent = document.getElementById('story_content');
+#     const form_create_story = document.querySelector('#generate_story_form');
+#     const form_create_comic = document.querySelector('#generate_comic_form');
+#     const prompt = document.getElementById("prompt");
+#     const comic_rqst_div = document.getElementById("comic_request");
+
+
+#     form_create_story.addEventListener('submit', async (e) => {
+#       e.preventDefault();
+
+#       const input_value = document.getElementById('input_value').value;
+#       prompt.classList.remove('d-flex');
+#       prompt.classList.add('d-none');
+
+#       const response = await fetch('/', {
+#         method: 'POST',
+#         headers: {
+#           'Content-Type': 'application/x-www-form-urlencoded',
+#         },
+#         body: `input_value=${encodeURIComponent(input_value)}`
+        
+#       });
+#       console.log(typeof(`input_value=${encodeURIComponent(input_value)}`));
+#       const reader = response.body.getReader();
+#       console.log(reader);
+#       let decoder = new TextDecoder();
+#       let partialChunk = '';
+#       while (true) {
+#         const { done, value } = await reader.read();
+#         if (done) {
+#           comic_rqst_div.classList.remove("d-none");
+#           comic_rqst_div.classList.add("d-flex");
+#           break;
+#         }
+#         const chunk = decoder.decode(value, { stream: true });
+#         partialChunk += chunk;
+#         storyContent.innerHTML = partialChunk;
+#       }
+#     });
+
+#     form_create_comic.addEventListener('submit', async(e) =>{
+#       e.preventDefault();
+#       generated_story = storyContent.innerHTML;
+
+#       // const response = await fetch('/generate_comic', {
+#       //   method: 'POST',
+#       //   headers: {
+#       //     'Content-Type': 'application/x-www-form-urlencoded',
+#       //   },
+#       //   body: `input_value=${encodeURIComponent(generated_story)}`
+        
+#       // });
+    
+#       // Send the content to the Flask app using AJAX
+#       var xhr = new XMLHttpRequest();
+#         xhr.open('POST', '/generate_comic', true);
+#         xhr.setRequestHeader('Content-Type', 'application/json');
+#         xhr.onreadystatechange = function() {
+#             if (xhr.readyState === XMLHttpRequest.DONE  && xhr.status === 200) {
+#                 // Handle the response from the Flask app if needed
+#                 console.log(xhr.responseText);
+#                 let img_url = xhr.responseText
+#                 document.getElementById("gen_img").src= img_url;
+#                 // window.location.href = '/generate_comic';
+#             }
+#         };
+#         xhr.send(JSON.stringify({ content: generated_story }));
+
+#     })
+
+#   </script>
+# </body>
+
+# </html>
+
+
+
+
+# API STREAM
+# def generate_story_chunks():
+#             # Formulate the query
+#     query = [{
+#         "role": "user",
+#         "content": "Write a short story based on the topic: " + input_value + " The story should be four or five paragraph long."
+#     }]
+
+#     # Make a request to GPT API with stream=True
+#     chat_completion_response = client.chat.completions.create(
+#         messages=query,
+#         model="gpt-3.5-turbo",
+#         stream=True
+#     )
+
+#     # Yield each chunk of the response
+#     for chunk in chat_completion_response:
+#         if chunk.choices[0].delta.content is not None:
+#             yield chunk.choices[0].delta.content + ''
+#         else:
+#             yield ''  # Yield an empty chunk if no content is available
+
+# # Return a response with the generator function as content
+# return Response(generate_story_chunks(), mimetype='text/plain')
