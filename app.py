@@ -23,7 +23,7 @@ def index():
             # Formulate the query
             query = [{
                 "role": "user",
-                "content": input_value
+                "content": "Write a short story based on the topic: " + input_value + " The story should be four or five paragraph long."
             }]
 
             # Make a request to GPT API with stream=True
@@ -36,14 +36,14 @@ def index():
             # Yield each chunk of the response
             for chunk in chat_completion_response:
                 if chunk.choices[0].delta.content is not None:
-                    yield chunk.choices[0].delta.content.strip() + '\n\n'
+                    yield chunk.choices[0].delta.content + ''
                 else:
                     yield ''  # Yield an empty chunk if no content is available
 
         # Return a response with the generator function as content
         return Response(generate_story_chunks(), mimetype='text/plain')
-
-    return render_template('base.html')
+        
+    return render_template('index.html')
 
 # @app.route('/generate_story', methods = ['GET','POST'])
 # def generate_story():
