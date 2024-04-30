@@ -77,6 +77,9 @@
       e.preventDefault();
       generated_story = storyContent.innerHTML;
 
+      comic_rqst_div.classList.remove("d-flex");
+      comic_rqst_div.classList.add("d-none");
+
       var xhr = new XMLHttpRequest();
         xhr.open('POST', '/generate/story/comic', true);
         xhr.setRequestHeader('Content-Type', 'application/json');

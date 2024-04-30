@@ -20,7 +20,7 @@ def generate_comic():
 
     response = client.images.generate(
         model="dall-e-3",
-        prompt= "Story: " + data + "This is a short story. Generate a colorful comic like image based on the story given. Make sure the image has no text on it.",
+        prompt= "Story: " + data + "This is a short story. Generate a colorful comic like image without any text based on the story given.",
         size="1024x1024",
         quality="standard",
         n=1,
