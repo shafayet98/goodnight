@@ -17,15 +17,6 @@
     {% block body %}
 
     {% endblock %}
-   
-    <form action="/generate/story">
-      <button>Generate Story</button>
-    </form>
-
-    <form action="/generate/summary">
-      <button>Summaries Story</button>
-    </form>
-
   </div>
 
 
@@ -37,7 +28,10 @@
     const prompt = document.getElementById("prompt");
     const comic_rqst_div = document.getElementById("comic_request");
 
-
+    const generate_story_form = document.getElementById('gen_story_btn');
+    const summarise_story_form_btn = document.getElementById('summarise_story_btn');
+    
+  
     form_create_story.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -74,7 +68,7 @@
     form_create_comic.addEventListener('submit', async(e) =>{
       e.preventDefault();
       generated_story = storyContent.innerHTML;
-      
+
       var xhr = new XMLHttpRequest();
         xhr.open('POST', '/generate/story/comic', true);
         xhr.setRequestHeader('Content-Type', 'application/json');

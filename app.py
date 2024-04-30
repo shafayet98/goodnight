@@ -7,24 +7,20 @@ import time
 app = Flask(__name__)
 API_KEY = open("API_KEY", 'r').read()
 
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=API_KEY,
-)
+client = OpenAI(api_key=API_KEY)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('base.html')
+    return render_template('landing.html')
     
 
 @app.route('/generate/story/comic', methods=['GET','POST'])
 def generate_comic():
     data = request.json['content']
-    print(data)
 
     response = client.images.generate(
         model="dall-e-3",
-        prompt= "Story: " + data + "This is a short story. Generate a colorful comic like image based on the story given.",
+        prompt= "Story: " + data + "This is a short story. Generate a colorful comic like image based on the story given. Make sure the image has no text on it.",
         size="1024x1024",
         quality="standard",
         n=1,
@@ -45,7 +41,7 @@ def gen_story():
             # Formulate the query
             query = [{
                 "role": "user",
-                "content": "Write a short story based on the topic: " + input_value + " The story should be four or five paragraph long."
+                "content": "Write a ten paragraph story based on the topic: " + input_value
             }]
 
             # Make a request to GPT API with stream=True

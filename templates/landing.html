@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+<form id="gen_story" class="form_gen_story d-flex" action="/generate/story">
+    <button>Generate Story</button>
+</form>
+
+<form id="summarise_story" class='form_sum_story d-flex' action="/generate/summary">
+    <button>Summaries Story</button>
+</form>
+{% endblock %}
