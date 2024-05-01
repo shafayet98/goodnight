@@ -105,3 +105,17 @@ body {
     width: 60%;
     text-align: center;
 }
+
+#story_content{
+    font-size: 20px;
+    text-align: center;
+}
+#button_comic{
+    padding: 15px;
+    background: white;
+    border: 2px solid #C8102E;
+    transition: 0.3s;
+}
+#button_comic:hover{
+    border: 2px solid #000;
+}
