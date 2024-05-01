@@ -103,6 +103,41 @@
 
     })
 
+
+    // handle turning story into comic
+    turn_into_comic = document.getElementById("turn_into_comic_form");
+    
+
+
+    turn_into_comic.addEventListener('submit', async(e) =>{
+      e.preventDefault();
+      loading.classList.remove('d-none');
+      loading.classList.add('d-block');
+
+      story_input_for_comic = document.getElementById('comic_input').value;
+
+      // comic_rqst_div.classList.remove("d-flex");
+      // comic_rqst_div.classList.add("d-none");
+
+      var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/generate/summary/show', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE  && xhr.status === 200) {
+                // Handle the response from the Flask app if needed
+                // console.log(xhr.responseText);
+                result = xhr.responseText
+                loading.classList.add('d-none');
+                loading.classList.remove('d-block');
+                // document.getElementById("gen_img").src= url_img;
+                console.log(result);
+                // window.location.href = '/generate_comic';
+            }
+        };
+        xhr.send(JSON.stringify({ content: story_input_for_comic }));
+
+    })
+
   </script>
 </body>
 

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+<div id="show_comic">
+    {% for key, value in data.items() %}
+    <p>{{ value[0] }}</p>
+    <img src="{{ value[1] }}" alt="">
+    {% endfor %}
+</div>
+
+<div class="loading d-none mt-5">
+  <div class="d-flex justify-content-center">
+    <p>Generating comic, please wait...</p>
+  </div>
+  <div class="loading_wave">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+</div>
+{% endblock %}
