@@ -17,6 +17,7 @@ def index():
 @app.route('/generate/story/comic', methods=['GET','POST'])
 def generate_comic():
     data = request.json['content']
+    len(data)
 
     response = client.images.generate(
         model="dall-e-3",
@@ -25,9 +26,8 @@ def generate_comic():
         quality="standard",
         n=1,
     )
+
     image_url = response.data[0].url
-    
-    print(image_url)
     return image_url
 
 @app.route('/generate/story', methods=['GET', 'POST'])

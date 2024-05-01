@@ -38,6 +38,8 @@
 
     const generate_story_form = document.getElementById('gen_story_btn');
     const summarise_story_form_btn = document.getElementById('summarise_story_btn');
+
+    loading = document.querySelector('.loading');
     
   
     form_create_story.addEventListener('submit', async (e) => {
@@ -75,6 +77,9 @@
 
     form_create_comic.addEventListener('submit', async(e) =>{
       e.preventDefault();
+      loading.classList.remove('d-none');
+      loading.classList.add('d-block');
+
       generated_story = storyContent.innerHTML;
 
       comic_rqst_div.classList.remove("d-flex");
@@ -88,6 +93,8 @@
                 // Handle the response from the Flask app if needed
                 // console.log(xhr.responseText);
                 url_img = xhr.responseText
+                loading.classList.add('d-none');
+                loading.classList.remove('d-block');
                 document.getElementById("gen_img").src= url_img;
                 // window.location.href = '/generate_comic';
             }
