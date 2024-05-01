@@ -14,10 +14,51 @@ def index():
     return render_template('landing.html')
     
 
+def generate_summary(story):
+    query = [{
+        "role": "user",
+        "content": "Your task is to summarise stories. Here is a short story for you. Summarise it with 5 bullet points and return the points in a json object. Here is the story: " + story 
+        + """ \n The format of return should be a JSON object
+        
+        {
+            "summary": [line 1, line 2, line 3]
+        }
+        
+        """
+    }]
+
+    # Make a request to GPT API with stream=True
+    chat_completion_response = client.chat.completions.create(
+        messages=query,
+        model="gpt-3.5-turbo"
+    )
+    summary = chat_completion_response.choices[0].message.content.strip('\n').strip()
+    summary_dict = json.loads(summary)
+    summary_lst = summary_dict['summary']
+    print(len(summary_lst))
+
+    comic_images = []
+    for item in summary_lst:
+        response = client.images.generate(
+            model="dall-e-3",
+            prompt= "Story Summary: " + item + "This is a single line of a story. Generate a colorful comic like image without any text based on the line given.",
+            size="1024x1024",
+            quality="standard",
+            n=1,
+        )
+        imgurl = response.data[0].url
+        comic_images.append(imgurl)
+    print(summary_lst)
+    print(comic_images)
+
+
+
+
 @app.route('/generate/story/comic', methods=['GET','POST'])
 def generate_comic():
     data = request.json['content']
-    len(data)
+    
+    # generate_summary(data)
 
     response = client.images.generate(
         model="dall-e-3",
