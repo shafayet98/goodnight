@@ -7,11 +7,43 @@
 
 
 {% block body %}
-<form id="gen_story" class="form_gen_story d-flex" action="/generate/story">
-    <button>Generate Story</button>
-</form>
+<div class="container mt-5 options">
+    <div class="d-flex justify-content-center gap-4">
+        <form id="gen_story" class="form_gen_story d-flex" action="/generate/story">
+            
+            <button>
+                <div class="d-flex justify-content-center">
+                    <img src="../static/images/book.png" alt="">
+                </div>
+                <p>Generate Story</p>
+            </button>
+        </form>
 
-<form id="summarise_story" class='form_sum_story d-flex' action="/generate/summary">
-    <button>Summaries Story</button>
-</form>
+        <form id="summarise_story" class='form_sum_story d-flex' action="/generate/summary">
+            <button>
+                <div class="d-flex justify-content-center">
+                    <img src="../static/images/create.png" alt="">
+                </div>
+                <p>Summaries Story</p> 
+            </button>
+        </form>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <h4>About us</h4>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="abt_us">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis voluptatibus laborum quae provident temporibus nemo possimus exercitationem, fuga consectetur molestiae assumenda distinctio atque, minima iusto eos harum?
+                <br>Tempore ex odit enim odio quos alias sunt quidem nihil temporibus repellendus! Itaque molestiae voluptates laboriosam aliquid nesciunt nam ullam facilis omnis.</p>
+            
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam fuga sit enim aliquam? Aspernatur impedit sint a nostrum non quaerat quisquam saepe! 
+                <br>Recusandae excepturi accusantium consectetur deleniti fuga eius quae eligendi eveniet odit, dolorem veniam, praesentium id perspiciatis, officiis vel aut reprehenderit! Ut rem modi voluptatem aliquid nihil? Fugiat, nihil.
+            </p>
+        </div>
+    </div>
+    
+</div>
+
 {% endblock %}
