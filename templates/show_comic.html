@@ -2,33 +2,20 @@
 
 
 {% block head %}
-
 {% endblock %}
 
 
 {% block body %}
-<div id="show_comic">
-    {% for key, value in data.items() %}
-    <p>{{ value[0] }}</p>
-    <img src="{{ value[1] }}" alt="">
-    {% endfor %}
-</div>
-
-<div class="loading d-none mt-5">
-  <div class="d-flex justify-content-center">
-    <p>Generating comic, please wait...</p>
+<div id="show_comic" class="container">
+  {% for key, value in data.items() %}
+  <div class="row mt-5">
+    <div class="col-sm-5">
+      <p>{{ value[0] }}</p>
+    </div>
+    <div class="col-sm-7">
+      <img src="{{ value[1] }}" alt="">
+    </div>
   </div>
-  <div class="loading_wave">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-  </div>
+  {% endfor %}
 </div>
 {% endblock %}

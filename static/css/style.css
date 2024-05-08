@@ -208,3 +208,10 @@ body {
         transform: scale(0);
     }
 }
+
+
+/* generate comic from story styling */
+#show_comic img{
+    width: 60%;
+    height: 400px;
+}

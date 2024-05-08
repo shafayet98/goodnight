@@ -2,12 +2,10 @@
 
 
 {% block head %}
-
 {% endblock %}
 
 
 {% block body %}
-
 <div id="comic_prompt" class="d-flex justify-content-center mt-5">
     <div class="mb-3 comic_prompt">
         <form id="turn_into_comic_form" action="/generate/summary/show" method="post">
@@ -19,5 +17,23 @@
         </form>
     </div>
 </div>
+
+<div class="loading d-none mt-5">
+    <div class="d-flex justify-content-center">
+      <p>Generating comic, please wait...</p>
+    </div>
+    <div class="loading_wave">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+  </div>
 
 {% endblock %}

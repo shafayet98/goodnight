@@ -60,12 +60,9 @@ def generate_summary_show():
         
         print(summary_comic)
         return render_template('show_comic.html', data = summary_comic)
+    return render_template('generate_summary.html')
 
     
-
-
-
-
 @app.route('/generate/story/comic', methods=['GET','POST'])
 def generate_comic():
     data = request.json['content']
